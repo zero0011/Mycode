@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Proxy MVVM</title>
+</head>
+<body>
+    <span id="container">1</span>
+    <span id="num">0</span>
+    <button id="button">点击加1</button>
+    <button id="numbtn">点击加1</button>
+    <script src="./proxy.js"></script>
+    <script>
+
+        (function () {
+            function watch (target,func) {
+                let proxy = new Proxy(target , {
+                    get : function(target,prop) {
+                        return target[prop]
+                    },
+                    set : function (target , prop , value) {
+                        target[prop] = value ;
+                        func(prop,value) ;
+                    }   
+                });
+                return proxy ;
+            }
+            window.watch = watch ;
+            
+        })()
+
+        let obj = {
+            value : 1
+        }
+        const newObj = watch(obj , function(key , newValue){
+            if(key === 'value') {
+                document.getElementById('container').innerHTML = newValue ;
+            }  else if(key === 'num') {
+                document.getElementById('num').innerHTML = newValue ;
+            }
+        })
+        document.getElementById('button').addEventListener('click' , ()=>{
+            newObj.value += 1 ;
+        })
+        document.getElementById('numbtn').addEventListener('click' , ()=>{
+            newObj.value += 2;
+        })
+    </script>
+</body>
+</html>
