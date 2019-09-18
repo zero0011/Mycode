@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="app">
+        <input type="text" id="txt">
+        <p id="show-txt"></p>
+    </div>
+    <script>
+        //值和显示的双向绑定
+        const txtEle = document.getElementById('show-txt');
+        const oInput = document.getElementById('txt');
+        
+
+        //这个页面(静态)的数据(data)核心
+        //保证数据和页面的双向绑定
+        //函数封装的思想    大于10行请封装成函数    每个函数只做一件事
+        //便可以复用
+
+
+
+        const obj = {
+            txt : 'zs'
+        };
+
+        Object.defineProperty(obj,'txt',{
+            get:function(){
+                console.log('获得属性');
+                return obj;
+            },
+            set: function(newValue){
+                console.log(newValue);
+                console.log('设置属性');
+                document.getElementById('show-txt').innerHTML =newValue;
+                document.getElementById('txt').value =newValue;
+            }
+        })
+        setTimeout(()=>{
+            obj.txt='123'
+        },3000)
+        document.getElementById('txt').addEventListener('keyup',function(e){
+            obj.txt = e.target.value;
+        })
+        
+
+        // function init(){
+        //     console.log(obj.txt);
+        //     render(obj.txt);
+        //     setTimeout(function(){
+        //         obj.txt='hw';
+        //         render(obj.txt);
+        //         console.log(obj.txt);
+        //     },1000)
+        // }
+        function render(txt){
+            oInput.value = obj.txt;
+            txtEle.innerText = obj.txt;
+        }
+        init();
+
+
+        
+
+
+
+
+
+
+
+        document.getElementById('txt')
+            .addEventListener('input',function(){
+                txtEle.innerHTML = this.value;
+                obj.txt = this.value;
+            })
+    </script>
+</body>
+</html>

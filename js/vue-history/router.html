@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="nav">
+        <a href="/page1">page1</a>
+        <a href="/page2">page2</a>
+        <a href="/page3">page3</a>
+        <a href="/page4">page4</a>
+        <a href="/page5">page5</a>
+    </div>
+    <!-- router-view动态部分 -->
+    <div id="container">
+
+    </div>
+    <script>
+        class HistoryRouter {
+            constructor () {
+                this.routers = {} ;
+                this.listenLink() ;
+            }
+            register (path,callback = function(){}) {
+                this.routers[path] = callback ;
+            }
+            listenLink () {
+                window.addEventListener('click' , (e) =>{
+                    let dom  = e.target ;
+                    console.log(dom);
+                    if(dom.tagName.toUpperCase() === 'A' && dom.getAttribute('href')) {
+                        e.preventDefault() ;
+                        //history api
+                        this.assign(dom.getAttribute('href'))
+                    }
+                },false)
+            }
+            assign (path) {
+                //添加一个新的状态  url 代表router 发生了变化
+                history.pushState({path},null,path);
+                this.dealPathHandler(path) ;
+            }
+            dealPathHandler (path) {
+                let handler = this.routers[path] ;
+                handler.apply(this) ;
+            }
+        }
+        
+       let container = document.getElementById('container')
+       let router = new HistoryRouter() ;
+       //注册
+       router.register('/page1',() =>{
+           container.innerHTML = '我是page1'
+       })
+       
+    </script>
+</body>
+</html>

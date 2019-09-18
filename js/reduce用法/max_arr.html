@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //reduce 求数组最大值
+        var arr = [0 , 9 , 3, 7] ;
+
+        let max = arr[0] ;
+        for (let i = 1 ; i < arr.length ;  i++){
+            if(arr[i] > max){
+                max = arr[i]
+            }
+        }
+        console.log(max) ;
+        console.log(arr)
+        //reduce
+        //
+        function findMax(arr) {
+            let max = arr.reduce((pre,next) =>{
+                console.log(pre,next)
+                if(pre < next){
+                    return next ;
+                } else
+                return pre
+                //这次的运算结果是下一次运算的pre
+            });
+            return max ;
+        }
+     console.log(findMax(arr))   
+    </script>
+</body>
+</html>

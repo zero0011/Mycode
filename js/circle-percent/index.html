@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       #id{
+        stroke-dashoffset : 10;
+        animation: stroke-dashoffset 1s ease forwards infinite
+       }
+    </style>
+</head>
+<body>
+    <!-- <img src="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_86d58ae1.png" alt="">
+    <img src="https://b-gold-cdn.xitu.io/v3/static/img/logo.a7995ad.svg" alt=""> -->
+    <svg width="200" height="200">
+        <circle
+        r="45"
+        cx="100"
+        cy="100"
+        stroke="rgb(229, 233, 242)"
+        fill="none"
+        stroke-width="3"
+        stroke-opacity='0.6'
+        >
+        </circle>
+
+
+        <circle id="id"
+        r="45"
+        cx="100"
+        cy="100"
+        stroke="red"
+        fill="none"
+        stroke-width="3"
+        stroke-opacity='0.6'
+        stroke-dasharray="283"
+        
+        >
+
+        </circle>
+    </svg>
+    <script>
+        var percent = 10 ;
+        var line = 2 * Math.PI * 45  ;
+        
+        var offset = line * (percent/100)
+        var offset1 = line - offset ;
+        var svg = document.getElementById('id');
+        svg.setAttribute('stroke-dashoffset',offset1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+hello world                                                                                                           
+CPU + 存储 + I/O
+
+sample.txt  在存储器上  打算修改时,调到内存中(通过CPU)=>    输出到屏幕。
+
+- 写入内容 
+    给CPU 发送指令  write =>存储器      内存和硬盘中有一个管道  流操作
+
+
+-require('fs/zlib')    模块化
+    -require('./self');
+
+-pipe   流操作的抽象
+    createReadStream
+    createWriteStream
+    pipe
+
+-超越浏览器 node后端

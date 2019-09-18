@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            background-color: #2962ff;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .progress-ring__circle{
+            transition: stroke-dashoffset .2s;
+            transform: rotateZ(-90deg);
+            transform-origin: 50% 50%;
+            stroke-dasharray: 226.726,326.726;
+            stroke-dashoffset: 10;
+        }
+        input{
+            position: fixed;
+            top: 10px;
+            left:10px;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- canvas成本过大 -->
+    <!-- 数学图形   svg    矢量图
+    由像素构成-->
+    <!-- <svg width='100%' height='100%' version='1.0'
+    xmlns='http://www.w3.org/2000/svg'>
+        <circle cx='100' cy='50' r="40"
+        stroke='black' stroke-width='2' fill='red'></circle>
+    </svg> -->
+    <svg class="progress-ring" width='120' height='120' xmlns='http://www.w3.org/2000/svg'>
+        <circle class="progress-ring__circle" cx='60' cy='60' r='52' stroke-width='4' stroke='white'>
+                
+        </circle>
+    </svg>
+    <!-- <div style="width :100px ;height :100px;border:2px dashed black;"></div> -->
+    <input type="number" step="5" min="0" max="100" placeholder="10" value="10">
+    <script>
+        var circle = document.querySelector('circle');
+        var radius = circle.r.baseVal.value;
+        var circumference  = radius * 2 * Math.PI ;
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        //减小偏移量
+        circle.style.strokeDashoffset = `${circumference}`;
+
+
+        function setProgress(percent){
+            const offset = circumference -  percent/100* circumference ;
+            circle.style.strokeDashoffset = offset;
+        }
+        const input = document.querySelector('input');
+        setProgress(input.value);
+        input.addEventListener('change',function(){
+            setProgress(input.value);
+        })
+    </script>
+</body>
+</html>

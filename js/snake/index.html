@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Snake game</title>
+    <style>
+        .welcome{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+    <img 
+    onload="imgLoaed()"
+    src="http://e0.ifengimg.com/12/2019/0728/494EF7CBAB5DD0A75D6F65A501C2D7AB1CE4F102_size23_w640_h360.jpeg
+    " alt="">
+    <div class="welcome">
+        welcome to Snake
+    </div>
+    <script>
+        function imgLoaed(){
+            console.log('哪吒来了');
+        }
+        function hideWelcome(){
+            console.log('隐藏welcome')
+            document.querySelector('.welcome')
+            .style.display = 'none';
+        }
+        //窗口加载完成
+        const loadAssets = (fn)=>{
+            setTimeout(()=>{
+               console.log('资源加载完毕');
+               fn();
+            },1000)
+        }
+        //在DOM树加载完成后 ,执行函数
+        document.addEventListener('DOMContentLoaded',()=>{
+            console.log('页面渲染完成');
+            loadAssets(hideWelcome);  
+        })
+        window.onload=()=>{
+            console.log('页面加载完成');
+                     
+        }
+    </script>
+</body>
+</html>

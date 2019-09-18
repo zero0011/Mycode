@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="replay">播放录像</button>
+    <script>
+        //ES5   写法
+        // var Person=function(name,sex){
+        //     this.name=name;
+        //     this.sex=sex;
+        // }
+        // Person.prototype.attack=function(){
+        //     console.log('这是攻击');
+        // }
+        // Person.prototype.defense=function(){
+        //     console.log('这是防御');
+        // }
+        // Person.prototype.jump=function(){
+        //     console.log('这是跳跃');
+        // }
+        // Person.prototype.Underarm=function(){
+        //     console.log('这是蹲下');
+        // }
+
+        //
+        let currentPlayer = null;
+        const Ryu={
+            name:'zs',
+            sex:'女',
+            attack:function(){
+                console.log('这是攻击');
+            },
+            defense:function(){
+                console.log('这是防御');
+            },
+            jump:function(){
+                console.log('这是跳跃');
+            },
+            Underarm:function(){
+                console.log('这是蹲下');
+            }
+        }
+        const ChunLi={
+            name:'hw',
+            sex:'女',
+            attack:function(){
+                console.log(`${this.name}攻击`);
+            },
+            defense:function(){
+                console.log(`${this.sex}防御`);
+            },
+            jump:function(){
+                console.log(`${this.jump}跳`);
+            },
+            Underarm:function(){
+                console.log(`${this.name}蹲下`);
+            }
+        }
+        const commands={
+            119:'jump',//w
+            115:'Underarm',//s
+            97:'defense',//a
+            100:'attack'//d
+        }
+
+       
+            
+        
+        
+        document.onkeypress=function(ev){
+            //谁    做什么  哪种动作
+            //参数 
+            let keyCode = ev.keyCode;
+            console.log(ev);
+            currentPlayer=Ryu;
+            command = makeCommand(currentPlayer,commands[keyCode]);
+            if(command){
+                command();
+                commandStack.push(command);
+            }
+            // console.log(ev.keyCode);
+            //Ryu 一句代码
+            //keyCode   对应的  动作 动起来
+            // 1.抽象  ev.keyCode  动作
+            //具象
+            
+
+        }
+
+        //封装
+        var  makeCommand = function(reciver,state){
+            return function(){
+                // console.log(reciver[state]);
+                reciver[state]();
+            }
+        }
+
+        document.getElementById('replay')
+        .onclick = function(){
+            let command;
+            while(command=commandStack.shift()){
+                command();
+            }
+        }
+
+    </script>
+</body>
+</html>
