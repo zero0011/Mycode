@@ -21,7 +21,7 @@ const isBalanced = (str) => {
             stack.push(node)
         } else if ([...map.values()].includes(node)) {
             if(stack.length !==0) {
-                stack.splice(stack.length-1,1)
+                stack.splice(stack.length-1,1) 
             }
         }
     }

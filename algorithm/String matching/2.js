@@ -15,7 +15,7 @@ function isBalanced(exp) {
             if(stack.length === 0) {
                 return false ;
             }
-            stack.pop(el)
+            stack.pop()
         }
     }
 
